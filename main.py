@@ -47,6 +47,7 @@ canvas = tk.Canvas(fenetre, width=COLS * CELL_SIZE, height=ROWS * CELL_SIZE, bg=
 canvas.pack()
 button_recommencer = tk.Button(fenetre, text="Recommencer", command=recommencer)
 draw_grid()
+button_recommencer.pack()
 canvas.bind("<Button-1>", handle_click)
 
 fenetre.mainloop()
