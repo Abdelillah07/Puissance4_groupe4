@@ -1,11 +1,5 @@
 import tkinter as tk
 
-def recommencer(): 
-    global grid 
-    grid = [[0] * COLS for _ in range(ROWS)] 
-    draw_grid()
-button_recommencer = tk.Button(fenetre, text="Recommencer", command=recommencer)
-
 # Paramètres de la grille
 ROWS = 6
 COLS = 7
@@ -39,6 +33,11 @@ def handle_click(event):
             current_player = 3 - current_player  # Alterne entre 1 et 2
             draw_grid()
             return
+
+def recommencer(): 
+    global grid 
+    grid = [[0] * COLS for _ in range(ROWS)] 
+    draw_grid()
             
 # Création de la fenêtre
 fenetre = tk.Tk()
@@ -46,7 +45,7 @@ fenetre.title("Jouons au puissance 4 !")
 
 canvas = tk.Canvas(fenetre, width=COLS * CELL_SIZE, height=ROWS * CELL_SIZE, bg="blue")
 canvas.pack()
-
+button_recommencer = tk.Button(fenetre, text="Recommencer", command=recommencer)
 draw_grid()
 canvas.bind("<Button-1>", handle_click)
 
