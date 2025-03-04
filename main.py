@@ -1,5 +1,11 @@
 import tkinter as tk
 
+def recommencer(): 
+    global grid 
+    grid = [[0] * COLS for _ in range(ROWS)] 
+    draw_grid()
+button_recommencer = tk.Button(fenetre, text="Recommencer", command=recommencer)
+
 # Paramètres de la grille
 ROWS = 6
 COLS = 7
