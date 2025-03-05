@@ -4,8 +4,6 @@ import fenetre_entre as accueil
 # Paramètres de la grille
 ROWS = int(accueil.lignes)
 COLS = int(accueil.colonnes)
-ROWS = 6
-COLS = 7
 CELL_SIZE = 80
 RADIUS = CELL_SIZE // 2 - 5
 
