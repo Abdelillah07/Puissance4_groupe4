@@ -1,28 +1,20 @@
 import tkinter as tk
 
 def access():
+    "Bouton qui prend le nombre de lignes et de colonne de la grille puissance 4 et qui change de fenêtre"
+    global lignes, colonnes
     lignes = entre_lignes.get()
     colonnes = entre_colonnes.get()
-    titre.destroy()
-    label_lignes.destroy()
-    label_colonnes.destroy()
-    entre_lignes.destroy()
-    entre_colonnes.destroy()
-    button_confirmer.destroy()
+    fenetre.quit()
 
 def default():
+    "Bouton qui prend le nombre de lignes et de colonne par défaut de la grille puissance 4 et qui change de fenêtre"
+    global lignes, colonnes
     lignes = 6
     colonnes = 7
-    titre.destroy()
-    label_lignes.destroy()
-    label_colonnes.destroy()
-    entre_lignes.destroy()
-    entre_colonnes.destroy()
-    button_confirmer.destroy()
-    button_default.destroy()
+    fenetre.quit()
 
 lignes, colonnes = 0, 0
-
 fenetre = tk.Tk()
 fenetre.title("Puissance 4")
 
