@@ -7,16 +7,15 @@ def check_winner():
                 return grid[row][col]
             
 
-            
-            # Vérification verticale
+    # Vérification verticale
     for row in range(ROWS - 3):
         for col in range(COLS):
             if grid[row][col] != 0 and all(grid[row + i][col] == grid[row][col] for i in range(4)):
                 return grid[row][col]
             
             
-            # Vérification diagonale (bas gauche → haut droit)
-            for row in range(3, ROWS):
-                for col in range(COLS - 3):
+    # Vérification diagonale (bas gauche → haut droit)
+    for row in range(3, ROWS):
+         for col in range(COLS - 3):
             if grid[row][col] != 0 and all(grid[row - i][col + i] == grid[row][col] for i in range(4)):
                 return grid[row][col]
