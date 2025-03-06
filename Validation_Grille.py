@@ -19,3 +19,10 @@ def check_winner():
          for col in range(COLS - 3):
             if grid[row][col] != 0 and all(grid[row - i][col + i] == grid[row][col] for i in range(4)):
                 return grid[row][col]
+            
+    # Vérification diagonale (haut gauche → bas droit)
+    for row in range(ROWS - 3):
+        for col in range(COLS - 3):
+            if grid[row][col] != 0 and all(grid[row + i][col + i] == grid[row][col] for i in range(4)):
+                return grid[row][col]
+
