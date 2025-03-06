@@ -26,3 +26,11 @@ def check_winner():
             if grid[row][col] != 0 and all(grid[row + i][col + i] == grid[row][col] for i in range(4)):
                 return grid[row][col]
 
+    return None  # Aucun gagnant pour l'instant
+
+
+#On doit modifier handle_click pour vérifier après chaque coup :
+def handle_click(event):
+    """Ajoute un jeton dans la colonne sélectionnée et vérifie la victoire."""
+    global current_player
+    col = event.x // CELL_SIZE
