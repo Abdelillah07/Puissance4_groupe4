@@ -100,3 +100,18 @@ def main():
     draw_grid()  # Dessiner la grille au début
 
     return fenetre
+
+# Création de la fenêtre principale
+root = tk.Tk()
+root.title("Jeu avec bouton de redémarrage")
+
+# Bouton pour recommencer le jeu
+restart_button = tk.Button(root, text="Recommencer", command=restart_game)
+restart_button.pack(pady=20)
+
+# Bouton pour enregistrer la partie
+save_button = tk.Button(root, text="Enregistrer la partie", command=save_game)
+save_button.pack(pady=10)
+
+# commande qui permet de relancer la boucle principale de Tkinter
+root.mainloop()
