@@ -1,4 +1,5 @@
 import tkinter as tk
+import Validation_Grille.py
 import fenetre_entre as accueil
 
 # Paramètres de la grille
