@@ -53,4 +53,4 @@ button_recommencer.pack()
 canvas.bind("<Button-1>", handle_click)
 
 fenetre.mainloop()
-haha
+h
