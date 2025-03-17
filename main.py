@@ -102,16 +102,11 @@ def main():
     return fenetre
 
 import tkinter as tk
-from tkinter import messagebox
 
-# Fonction pour simuler l'enregistrement de la partie
+# Fonction pour enregistrer la partie
 def enregistrer_partie():
-    # Par exemple, on sauvegarde l'état du jeu dans un fichier texte
     with open("sauvegarde.txt", "w") as fichier:
         fichier.write("État de la partie : Niveau 3, Score: 1500")
-    
-    # Message de confirmation
-    messagebox.showinfo("Enregistrement", "La partie a été enregistrée avec succès !")
 
 # Création de la fenêtre principale
 fenetre = tk.Tk()
@@ -123,4 +118,13 @@ bouton_enregistrer.pack(pady=20)
 
 # Lancer l'interface graphique
 fenetre.mainloop()
+
+maFenetre=Tk()
+bouton_fermer=Button(maFenetre, texte="Fermer", command=maFenetre.quit)
+bouton_fermer.pack()
+maFenetre.mainloop()
+
+
+
+
 
