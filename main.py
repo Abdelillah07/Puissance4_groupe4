@@ -146,7 +146,7 @@ def handle_click(event):
             if winner:
                 canvas.unbind("<Button-1>")  # Désactive les clics après la victoire
                 canvas.create_text(COLS * CELL_SIZE // 2, ROWS * CELL_SIZE // 2, 
-                                   text=f"Joueur {winner} a gagné !", font=("Arial", 45, "Arial"), fill="black")
+                                   text=f"Joueur {winner} a gagné !", font=("Arial", 45, "bold"), fill="black")
             else:
                 current_player = 3 - current_player  # Alterne entre 1 et 2
             return
