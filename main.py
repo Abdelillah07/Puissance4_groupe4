@@ -1,7 +1,7 @@
 import tkinter as tk
 import Validation_Grille.py
 
-# Paramètres de la grille
+# Paramètres de la grille par défault 
 ROWS = 6
 COLS = 7
 CELL_SIZE = 80
@@ -75,7 +75,8 @@ def handle_click(event):
             current_player = 3 - current_player  # Alterne entre 1 et 2
             draw_grid()
             return
-
+        
+#Recommencer la partie en remettant à zéro la grille
 def recommencer(): 
     global grid 
     grid = [[0] * COLS for _ in range(ROWS)] 
@@ -119,11 +120,8 @@ bouton_enregistrer.pack(pady=20)
 # Lancer l'interface graphique
 fenetre.mainloop()
 
-#bouton pour fermer le jeu
-maFenetre = tk.Tk()
-
-bouton_fermer = tk.Button(maFenetre, text="Fermer", command=maFenetre.quit)
-
+maFenetre=tk()
+bouton_fermer=Button(maFenetre, texte="Fermer", command=maFenetre.quit)
 bouton_fermer.pack()
 
 maFenetre.mainloop()
