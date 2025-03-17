@@ -151,17 +151,40 @@ def handle_click(event):
                 current_player = 3 - current_player  # Alterne entre 1 et 2
             return
 
-# Création de la fenêtre principale
-root = tk.Tk()
-root.title("Jeu avec bouton de redémarrage")
+def recommencer(): 
+    global grid 
+    grid = [[0] * COLS for _ in range(ROWS)] 
+    draw_grid()
+            
+# Création de la fenêtre
+def main():
+    global canvas
 
-# Bouton pour recommencer le jeu
-restart_button = tk.Button(root, text="Recommencer", command=recommencer)
-restart_button.pack(pady=20)
+    fenetre = tk.Toplevel()
+    fenetre.title("Jouons au puissance 4 !")
 
-# Bouton pour enregistrer la partie
-save_button = tk.Button(root, text="Enregistrer la partie")
-save_button.pack(pady=10)
+    # Créer le canvas avec la bonne taille
+    canvas = tk.Canvas(fenetre, width=COLS * CELL_SIZE, height=ROWS * CELL_SIZE, bg="blue")
+    canvas.pack()
+    canvas.bind("<Button-1>", handle_click)
 
-# commande qui permet de relancer la boucle principale de Tkinter
-root.mainloop()
+    # Bouton pour recommencer la partie
+    button_recommencer = tk.Button(fenetre, text="Recommencer", command=recommencer)
+    button_recommencer.pack()
+
+    # Création du bouton pour enregistrer
+    bouton_enregistrer = tk.Button(fenetre, text="Enregistrer la Partie", command=enregistrer_partie)
+    bouton_enregistrer.pack(pady=20)
+    draw_grid()  # Dessiner la grille au début
+
+    return fenetre
+
+
+import tkinter as tk
+
+# Fonction pour enregistrer la partie
+def enregistrer_partie():
+    with open("sauvegarde.txt", "w") as fichier:
+        fichier.write("État de la partie : Niveau 3, Score: 1500")
+
+
