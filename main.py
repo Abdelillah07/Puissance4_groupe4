@@ -119,10 +119,15 @@ bouton_enregistrer.pack(pady=20)
 # Lancer l'interface graphique
 fenetre.mainloop()
 
-maFenetre=Tk()
-bouton_fermer=Button(maFenetre, texte="Fermer", command=maFenetre.quit)
+#bouton pour fermer le jeu
+maFenetre = tk.Tk()
+
+bouton_fermer = tk.Button(maFenetre, text="Fermer", command=maFenetre.quit)
+
 bouton_fermer.pack()
+
 maFenetre.mainloop()
+
 
 
 
