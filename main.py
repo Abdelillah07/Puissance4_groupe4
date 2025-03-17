@@ -101,17 +101,26 @@ def main():
 
     return fenetre
 
+import tkinter as tk
+from tkinter import messagebox
+
+# Fonction pour simuler l'enregistrement de la partie
+def enregistrer_partie():
+    # Par exemple, on sauvegarde l'état du jeu dans un fichier texte
+    with open("sauvegarde.txt", "w") as fichier:
+        fichier.write("État de la partie : Niveau 3, Score: 1500")
+    
+    # Message de confirmation
+    messagebox.showinfo("Enregistrement", "La partie a été enregistrée avec succès !")
+
 # Création de la fenêtre principale
-root = tk.Tk()
-root.title("Jeu avec bouton de redémarrage")
+fenetre = tk.Tk()
+fenetre.title("Enregistrement de Partie")
 
-# Bouton pour recommencer le jeu
-restart_button = tk.Button(root, text="Recommencer", command=restart_game)
-restart_button.pack(pady=20)
+# Création du bouton pour enregistrer
+bouton_enregistrer = tk.Button(fenetre, text="Enregistrer la Partie", command=enregistrer_partie)
+bouton_enregistrer.pack(pady=20)
 
-# Bouton pour enregistrer la partie
-save_button = tk.Button(root, text="Enregistrer la partie", command=save_game)
-save_button.pack(pady=10)
+# Lancer l'interface graphique
+fenetre.mainloop()
 
-# commande qui permet de relancer la boucle principale de Tkinter
-root.mainloop()
