@@ -1,7 +1,6 @@
 import tkinter as tk
-import Validation_Grille.py
 
-# Paramètres de la grille par défault 
+# Paramètres de la grille
 ROWS = 6
 COLS = 7
 CELL_SIZE = 80
@@ -67,16 +66,16 @@ def draw_grid():
 
 def handle_click(event):
     """Ajoute un jeton dans la colonne sélectionnée."""
-    global current_player
+    global current_player , grid
     col = event.x // CELL_SIZE
     for row in range(ROWS - 1, -1, -1):
         if grid[row][col] == 0:
             grid[row][col] = current_player
             current_player = 3 - current_player  # Alterne entre 1 et 2
             draw_grid()
+            check_winner()
             return
-        
-#Recommencer la partie en remettant à zéro la grille
+
 def recommencer(): 
     global grid 
     grid = [[0] * COLS for _ in range(ROWS)] 
@@ -102,32 +101,67 @@ def main():
 
     return fenetre
 
-import tkinter as tk
+def check_winner():
+    """Vérifie si un joueur a gagné."""
+    global grid
+    # Vérification horizontale
+    for row in range(ROWS):
+        for col in range(COLS - 3):
+            if grid[row][col] != 0 and all(grid[row][col + i] == grid[row][col] for i in range(4)):
+                return grid[row][col]
+            
 
-# Fonction pour enregistrer la partie
-def enregistrer_partie():
-    with open("sauvegarde.txt", "w") as fichier:
-        fichier.write("État de la partie : Niveau 3, Score: 1500")
+    # Vérification verticale
+    for row in range(ROWS - 3):
+        for col in range(COLS):
+            if grid[row][col] != 0 and all(grid[row + i][col] == grid[row][col] for i in range(4)):
+                return grid[row][col]
+            
+            
+    # Vérification diagonale (bas gauche → haut droit)
+    for row in range(3, ROWS):
+         for col in range(COLS - 3):
+            if grid[row][col] != 0 and all(grid[row - i][col + i] == grid[row][col] for i in range(4)):
+                return grid[row][col]
+            
+    # Vérification diagonale (haut gauche → bas droit)
+    for row in range(ROWS - 3):
+        for col in range(COLS - 3):
+            if grid[row][col] != 0 and all(grid[row + i][col + i] == grid[row][col] for i in range(4)):
+                return grid[row][col]
+
+    return None  # Aucun gagnant pour l'instant
+
+
+#On doit modifier handle_click pour vérifier après chaque coup :
+def handle_click(event):
+    """Ajoute un jeton dans la colonne sélectionnée et vérifie la victoire."""
+    global current_player
+    col = event.x // CELL_SIZE
+    for row in range(ROWS - 1, -1, -1):
+        if grid[row][col] == 0:
+            grid[row][col] = current_player
+            draw_grid()
+            winner = check_winner()
+            if winner:
+                canvas.unbind("<Button-1>")  # Désactive les clics après la victoire
+                canvas.create_text(COLS * CELL_SIZE // 2, ROWS * CELL_SIZE // 2, 
+                                   text=f"Joueur {winner} a gagné !", font=("Arial", 24), fill="white")
+            else:
+                current_player = 3 - current_player  # Alterne entre 1 et 2
+            return
 
 # Création de la fenêtre principale
-fenetre = tk.Tk()
-fenetre.title("Enregistrement de Partie")
+root = tk.Tk()
+root.title("Jeu avec bouton de redémarrage")
 
-# Création du bouton pour enregistrer
-bouton_enregistrer = tk.Button(fenetre, text="Enregistrer la Partie", command=enregistrer_partie)
-bouton_enregistrer.pack(pady=20)
+# Bouton pour recommencer le jeu
+restart_button = tk.Button(root, text="Recommencer", command=recommencer)
+restart_button.pack(pady=20)
 
-# Lancer l'interface graphique
-fenetre.mainloop()
+# Bouton pour enregistrer la partie
+save_button = tk.Button(root, text="Enregistrer la partie")
+save_button.pack(pady=10)
 
-maFenetre=tk()
-bouton_fermer=Button(maFenetre, texte="Fermer", command=maFenetre.quit)
-bouton_fermer.pack()
-
-maFenetre.mainloop()
-
-
-
-
-
-
+# commande qui permet de relancer la boucle principale de Tkinter
+root.mainloop()
