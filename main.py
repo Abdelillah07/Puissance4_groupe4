@@ -146,4 +146,4 @@ def main():
 # Fonction pour enregistrer la partie
 def enregistrer_partie():
     with open("sauvegarde.txt", "w") as fichier:
-        fichier.write("État de la partie : Niveau 3, Score: 1500")
+        fichier.write(f"{grid")
