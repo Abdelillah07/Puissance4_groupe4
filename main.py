@@ -146,4 +146,8 @@ def main():
 # Fonction pour enregistrer la partie
 def enregistrer_partie():
     with open("sauvegarde.txt", "w") as fichier:
-        fichier.write(f"{grid}")
+        fichier.write(f"{len(grid)}\n")
+        fichier.write(f"{len(grid[0])} \n")
+        for i in grid:
+            for j in i:
+                fichier.write(f"{j}\n")
