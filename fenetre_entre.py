@@ -7,7 +7,7 @@ def ouvrir_fenetre():
 fen = tk.Tk()
 fen.title("Puissance 4")
 
-label_haut  = tk.Label(fen, text="Mode de jeu")
+label_haut  = tk.Label(fen, text="Mode de Jeu")
 button_1vs1 = tk.Button(fen, text="1 VS 1", command=ouvrir_fenetre)
 button_1vsRobot = tk.Button(fen, text="1 VS ROBOT", command=ouvrir_fenetre)
 button_Set_et_Match = tk.Button(fen, text="Set et Match", command=ouvrir_fenetre)
