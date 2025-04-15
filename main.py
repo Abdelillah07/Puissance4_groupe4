@@ -151,3 +151,26 @@ def enregistrer_partie():
         for i in grid:
             for j in i:
                 fichier.write(f"{j}\n")
+
+def partie_enregistrer():
+    """Fonction qui lance la partie enregistrer par le joueur auparavant"""
+    global ROWS, COLS, grid
+
+    fichier_sauvegarde = open('sauvegarde.txt', 'r') #On reprend les enregistrer dans le fichier sauvegarde.txt
+    ROWS = int(fichier_sauvegarde.readline()) #La première ligne désinge le nombre de ligne de la grille enregistrer
+    COLS = int(fichier_sauvegarde.readline()) #La second ligne désinge le nombre de colonne de la grille enregistrer
+    grid = [[]for i in range(ROWS)]
+    ligne = fichier_sauvegarde.readline()
+    nb_col = 0
+    indice_ligne = 0
+    #Boucle qui enregistre les position des jetons dans la grille global grid réinitialisée
+    while ligne !='':
+        if nb_col < COLS:
+            grid[indice_ligne].append(int(ligne))
+            ligne = fichier_sauvegarde.readline()
+            nb_col += 1
+        else:
+            nb_col = 0
+            indice_ligne += 1
+    #Execution de la fenêtre de la partie enregistrer
+    main()
