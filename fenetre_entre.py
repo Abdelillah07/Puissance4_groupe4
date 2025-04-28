@@ -1,18 +1,9 @@
 import tkinter as tk
-import main
+from main import fen_parties
+from set_et_match import fen_parties_set_et_match
 
-def ouvrir_fenetre():
-    main.fen_accueil()
-
-# Création de la fenêtre principale
 fen = tk.Tk()
 fen.title("Puissance 4")
-fen.geometry("400x400")  # Taille de la fenêtre
-fen.configure(bg="#ADD8E6")  # Fond bleu clair
-
-# Titre avec une police moderne et un fond coloré
-label_haut = tk.Label(fen, text="Mode de jeu", font=("Arial", 18, "bold"), bg="#ADD8E6", fg="black")
-label_haut.pack(pady=20)
 
 # Style des boutons avec un fond coloré et une bordure arrondie
 button_style = {
@@ -26,16 +17,14 @@ button_style = {
     "fg": "black"
 }
 
-# Boutons pour les différents modes de jeu
-button_1vs1 = tk.Button(fen, text="1 VS 1", **button_style, command=ouvrir_fenetre)
-button_1vsRobot = tk.Button(fen, text="1 VS ROBOT", **button_style, command=ouvrir_fenetre)
-button_Set_et_Match = tk.Button(fen, text="Set et Match", **button_style, command=ouvrir_fenetre)
+label_haut  = tk.Label(fen, text="Mode de jeu")
+button_1vs1 = tk.Button(fen, text="1 VS 1",**button_style, command=fen_parties)
+button_1vsRobot = tk.Button(fen, text="1 VS ROBOT",**button_style,)
+button_Set_et_Match = tk.Button(fen, text="Set et Match", **button_style, command=fen_parties_set_et_match)
 
-# Espacement des boutons et ajout à la fenêtre
-button_1vs1.pack(pady=15)
-button_1vsRobot.pack(pady=15)
-button_Set_et_Match.pack(pady=15)
+label_haut.pack(padx=10, pady=10)
+button_1vs1.pack(padx=10, pady=10)
+button_1vsRobot.pack(padx=10, pady=10)
+button_Set_et_Match.pack(padx=10, pady=10)
 
-# Lancer la boucle principale de l'interface
 fen.mainloop()
-
