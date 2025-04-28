@@ -54,6 +54,20 @@ def fen_accueil():
 
     return fenetre
 
+def fen_parties():
+    """Fenêtre d'accueil permettant de changer les parametres du jeu"""
+    #Fenêtre de la liste
+    fenetre = tk.Toplevel()
+    fenetre.title("Puissance 4")
+    
+    button_partie_enregistrer = tk.Button(fenetre, text="Partie enregistrer", command=partie_enregistrer)
+    button_nouvelle_partie = tk.Button(fenetre, text="Nouvelle Partie", command=fen_accueil)
+
+    button_partie_enregistrer.grid(row=4, column=0)
+    button_nouvelle_partie.grid(row=4, column=1)
+
+    return fenetre
+    
 def draw_grid():
     """Dessine la grille et les jetons déjà placés."""
     global ROWS, COLS, CELL_SIZE, RADIUS, PLAYER_COLORS, canvas
