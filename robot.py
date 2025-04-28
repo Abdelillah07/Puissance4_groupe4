@@ -98,6 +98,44 @@ def handle_click(event):
 #Fonctions manquantes en plusieurs lignes
     #PAS ENCORE FAIT
 
+def evaluate(grid, player):
+    """Fonction qui évalue les lignes de toute la grille verticalement/horizontalement/diagonalameent
+    et calcule le score dans une variable 'score' grâce à la fonction evaluate_window"""
+    score = 0
+    rows = len(grid)
+    cols = len(grid[0])
+
+    ## Bonus pour jouer au centre (colonne centrale)
+    center_col = cols // 2
+    center_array = [grid[r][center_col] for r in range(rows)]
+    center_count = center_array.count(player)
+    score += center_count * 6
+
+    ## Évaluer lignes horizontales
+    for r in range(rows):
+        for c in range(cols - 3):
+            window = [grid[r][c+i] for i in range(4)]
+            score += evaluate_window(window, player)
+
+    ## Évaluer colonnes verticales
+    for c in range(cols):
+        for r in range(rows - 3):
+            window = [grid[r+i][c] for i in range(4)]
+            score += evaluate_window(window, player)
+
+    ## Évaluer diagonales positives (bas-gauche → haut-droit)
+    for r in range(rows - 3):
+        for c in range(cols - 3):
+            window = [grid[r+i][c+i] for i in range(4)]
+            score += evaluate_window(window, player)
+
+    ## Évaluer diagonales négatives (haut-gauche → bas-droit)
+    for r in range(3, rows):
+        for c in range(cols - 3):
+            window = [grid[r-i][c+i] for i in range(4)]
+            score += evaluate_window(window, player)
+
+    return score
 
 def minimax(grid, depth, maximizing_player):
     """Fonction qui renvoi le meilleur de score du meilleur 
