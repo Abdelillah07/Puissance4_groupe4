@@ -94,3 +94,42 @@ def handle_click(event):
             grid[row][col] = current_player
             draw_grid()
             return
+
+#Fonctions manquantes en plusieurs lignes
+    #PAS ENCORE FAIT
+
+
+def minimax(grid, depth, maximizing_player):
+    """Fonction qui renvoi le meilleur de score du meilleur 
+    coup que le robot peut jouer tout en minimisant au maximum le score du joueur"""
+    global current_player
+    if depth == 0 or is_terminal(grid):
+        return evaluate(grid, current_player)
+
+    if maximizing_player:
+        max_eval = float('-inf')
+        for col in get_valid_moves(grid):
+            new_grid = simulate_move(grid, col, current_player)
+            eval = minimax(new_grid, depth-1, False)
+            max_eval = max(max_eval, eval)
+        return max_eval
+    else:
+        min_eval = float('inf')
+        for col in get_valid_moves(grid):
+            new_grid = simulate_move(grid, col, current_player)
+            eval = minimax(new_grid, depth-1, True)
+            min_eval = min(min_eval, eval)
+        return min_eval
+    
+def meilleur_coup(grid):
+    """Fonction qui renvoi la colonne qui permet de gagner au robot avec la meilleur stratégie"""
+    global current_player
+    meilleur_score = float('-inf')
+    best_coup = None
+    for col in get_valid_moves(grid):
+        grille = simulate_move(grid, col, current_player)        
+        score = minimax(grille, 3, False)
+        if score > meilleur_score:
+            meilleur_score = score
+            best_coup = col
+    return best_coup
