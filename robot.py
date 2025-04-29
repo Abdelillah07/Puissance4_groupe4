@@ -171,3 +171,33 @@ def meilleur_coup(grid):
             meilleur_score = score
             best_coup = col
     return best_coup
+
+def evaluate_window(window, player):
+    """Calcul le score d'une fenêtre de la grille en fonction du nombre de jetons aligner dans une ligne"""
+    score = 0
+    opponent = 2 if player == 1 else 1
+
+    if window.count(player) == 4:
+        score += 1000
+    elif window.count(player) == 3 and window.count(0) == 1:
+        score += 50
+    elif window.count(player) == 2 and window.count(0) == 2:
+        score += 10
+
+    if window.count(opponent) == 3 and window.count(0) == 1:
+        score -= 80
+
+    return score
+
+def simulate_move(grid, col, player):
+    """Renvoi une grille sumilant le prochain coup de jeton (Rouge ou Jaune)"""
+    # Copier la grille pour ne pas modifier l'original
+    new_grid = copy.deepcopy(grid)
+
+    # Chercher la première case vide en partant du bas
+    for row in range(len(grid) - 1, -1, -1):
+        if new_grid[row][col] == 0:
+            new_grid[row][col] = player
+            break
+
+    return new_grid
