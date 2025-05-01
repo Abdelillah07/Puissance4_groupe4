@@ -95,8 +95,17 @@ def handle_click(event):
             draw_grid()
             return
 
-#Fonctions manquantes en plusieurs lignes
-    #PAS ENCORE FAIT
+def click(event): 
+    """Ajoute le jeton du joueur puis celui du robot dans la grille et vérifie si il y a un gagnant"""
+    global ROWS, COLS, CELL_SIZE
+    handle_click(event)
+    robot()
+    draw_grid()
+    winner = check_winner()
+    if winner:
+        canvas.create_text(COLS * CELL_SIZE // 2, ROWS * CELL_SIZE // 2, 
+        text=f"Joueur {winner} a gagné !", font=("Arial", 45, "bold"), fill="black")
+
 
 def evaluate(grid, player):
     """Fonction qui évalue les lignes de toute la grille verticalement/horizontalement/diagonalameent
