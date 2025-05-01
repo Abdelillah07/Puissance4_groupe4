@@ -1,4 +1,5 @@
 import tkinter as tk
+from main import main, access
 
 # Paramètres de la grille
 ROWS = 6
@@ -25,22 +26,48 @@ VictoireRougeText = None
 VictoireJauneText = None
 
 def fen_parties_set_et_match():
-    """Fenêtre d'accueil permettant de changer les parametres du jeu"""
-
-    #Fenêtre de la liste
+    """Fenêtre de configuration stylisée pour Set et Match."""
     fenetre = tk.Toplevel()
-    fenetre.title("Puissance 4")
-    
-    nb_parties_texte = tk.Label(fenetre, text="Nombre de paries")
-    nb_parties_entry = tk.Entry(fenetre)
-    button_confirmer = tk.Button(fenetre, text="Confirmer", command=lambda : set_et_match(nb_parties_entry.get()))
+    fenetre.title("Mode Set et Match")
+    fenetre.configure(bg="#fff8dc")  # Fond crème
 
-    nb_parties_texte.grid(row=0, column=0)
-    nb_parties_entry.grid(row=0, column=1)
-    button_confirmer.grid(row=1, column=0)
+    # Titre
+    titre = tk.Label(fenetre, text="Configurer le Set et Match", font=("Arial", 20, "bold"),
+                     bg="#fff8dc", fg="#8b8000")
+    titre.grid(row=0, column=0, columnspan=2, pady=(20, 10))
 
-    return fenetre
+    # Champs de configuration
+    champs = [
+        ("Nombre de lignes :", 1),
+        ("Nombre de colonnes :", 2),
+        ("Jetons pour gagner :", 3),
+        ("Nombre de parties :", 4)
+    ]
 
+    entries = {}
+
+    for text, row in champs:
+        label = tk.Label(fenetre, text=text, font=("Arial", 12), bg="#fff8dc", fg="black")
+        label.grid(row=row, column=0, padx=10, pady=5, sticky="e")
+        entry = tk.Entry(fenetre, font=("Arial", 12))
+        entry.grid(row=row, column=1, padx=10, pady=5)
+        entries[text] = entry
+
+    # Boutons
+    confirmer = tk.Button(
+        fenetre, text="Confirmer", font=("Arial", 12, "bold"),
+        bg="#FFD700", fg="black",
+        command=lambda: access(entries["Nombre de lignes :"].get(),
+                               entries["Nombre de colonnes :"].get(),
+                               entries["Jetons pour gagner :"].get())
+    )
+    confirmer.grid(row=5, column=1, pady=20)
+
+    annuler = tk.Button(
+        fenetre, text="Annuler", font=("Arial", 12, "bold"),
+        bg="#e0e0e0", fg="black", command=fenetre.destroy
+    )
+    annuler.grid(row=5, column=0, pady=20)
 def set_et_match(nb_parties_choisis):
     global canvas, ROWS, COLS, CELL_SIZE, nb_parties, nb_parties_reserve, VictoireRougeText, VictoireJauneText
 
