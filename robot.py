@@ -210,6 +210,18 @@ def simulate_move(grid, col, player):
             break
 
     return new_grid
+    
+
+def get_valid_moves(grid):
+    """Renvoi les colonnes de la grille qui ne sont pas encore remplies"""
+    lst_col_dispo = []
+    for col in range(len(grid[0])):
+        for row in range(len(grid)-1, -1, -1):
+            if grid[row][col] == 0:
+                lst_col_dispo.append(col)
+                break
+    return lst_col_dispo
+    
 
  def is_terminal(grid):
     """Fonction qui dit si la grille et rempli ou non"""
