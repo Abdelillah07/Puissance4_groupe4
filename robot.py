@@ -201,3 +201,13 @@ def simulate_move(grid, col, player):
             break
 
     return new_grid
+
+ def is_terminal(grid):
+    """Fonction qui dit si la grille et rempli ou non"""
+    tab_row = [i for i in range(len(grid))]
+    for index_line in range(len(grid)):
+        if 0 not in grid[index_line]:
+            tab_row.remove(index_line)
+    if tab_row == []:
+        return True
+    return False
