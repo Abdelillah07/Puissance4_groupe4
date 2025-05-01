@@ -75,18 +75,34 @@ def fen_accueil():
     return fenetre
 
 def fen_parties():
-    """Fenêtre d'accueil permettant de changer les parametres du jeu"""
-    #Fenêtre de la liste
-    fenetre = tk.Toplevel()
+    """Fenêtre principale avec un thème jaune chaleureux."""
+    fenetre = tk.Tk()  # Fenêtre principale
     fenetre.title("Puissance 4")
-    
-    button_partie_enregistrer = tk.Button(fenetre, text="Partie enregistrer", command=partie_enregistrer)
-    button_nouvelle_partie = tk.Button(fenetre, text="Nouvelle Partie", command=fen_accueil)
+    fenetre.configure(bg="#fff8dc")  # Fond couleur crème
 
-    button_partie_enregistrer.grid(row=4, column=0)
-    button_nouvelle_partie.grid(row=4, column=1)
+    titre = tk.Label(
+        fenetre, text="Puissance 4", font=("Arial", 28, "bold"),
+        bg="#fff8dc", fg="#8b8000"  # Jaune foncé
+    )
+    sous_titre = tk.Label(
+        fenetre, text="Choisissez une option", font=("Arial", 16),
+        bg="#fff8dc", fg="#8b8000"
+    )
 
-    return fenetre
+    button_nouvelle_partie = tk.Button(
+        fenetre, text="Nouvelle Partie", command=fen_accueil,
+        font=("Arial", 14), bg="#ffeb3b", fg="black", padx=30, pady=15
+    )
+    button_partie_enregistrer = tk.Button(
+        fenetre, text="Reprendre Partie", command=partie_enregistrer,
+        font=("Arial", 14), bg="#ffd700", fg="black", padx=30, pady=15
+    )
+
+    # Placement
+    titre.pack(pady=(30, 10))
+    sous_titre.pack(pady=(0, 20))
+    button_nouvelle_partie.pack(pady=10)
+    button_partie_enregistrer.pack(pady=10)
     
 def draw_grid():
     """Dessine la grille et les jetons déjà placés."""
