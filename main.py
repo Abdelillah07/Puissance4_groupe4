@@ -24,33 +24,53 @@ def access(r, c, nb_jetons_valid):
     main()
 
 def fen_accueil():
-    """Fenêtre d'accueil permettant de changer les parametres du jeu"""
-    #Fenêtre de la liste
+    """Fenêtre de configuration du jeu avec style jaune."""
     fenetre = tk.Toplevel()
-    fenetre.title("Puissance 4")
+    fenetre.title("Configuration de la Partie")
+    fenetre.configure(bg="#fff8dc")  # Fond crème clair
 
-    #Différents widgets de la première fenêtre
-    titre = tk.Label(fenetre, text="Choisis le nombre de:")
-    label_lignes = tk.Label(fenetre, text="Lignes")
-    label_colonnes = tk.Label(fenetre, text="Colonnes")
-    label_jetons_valid = tk.Label(fenetre, text="Nombre de jetons pour valider le jeu")
-    entre_lignes = tk.Entry(fenetre)
-    entre_colonnes = tk.Entry(fenetre)
-    entre_jetons_valid = tk.Entry(fenetre)
+    # Titre
+    titre = tk.Label(
+        fenetre, text="Configurer la Partie", font=("Arial", 20, "bold"),
+        bg="#fff8dc", fg="#8b8000"
+    )
+    titre.grid(row=0, column=0, columnspan=2, pady=(20, 10))
 
-    button_confirmer = tk.Button(fenetre, text="Confirmer", command=lambda: access(entre_lignes.get(), entre_colonnes.get(), entre_jetons_valid.get()))
-    button_default = tk.Button(fenetre, text="Par défaut", command=main)
+    # Labels
+    label_lignes = tk.Label(fenetre, text="Nombre de lignes :", font=("Arial", 12),
+                            bg="#fff8dc", fg="black")
+    label_colonnes = tk.Label(fenetre, text="Nombre de colonnes :", font=("Arial", 12),
+                              bg="#fff8dc", fg="black")
+    label_jetons_valid = tk.Label(fenetre, text="Jetons pour gagner :", font=("Arial", 12),
+                                  bg="#fff8dc", fg="black")
 
-    #Emplacement des widgets dans la fenêtre
-    titre.grid(row=0, column=0, columnspan=2)
+    # Champs de saisie
+    entre_lignes = tk.Entry(fenetre, font=("Arial", 12))
+    entre_colonnes = tk.Entry(fenetre, font=("Arial", 12))
+    entre_jetons_valid = tk.Entry(fenetre, font=("Arial", 12))
+
+    # Boutons
+    button_confirmer = tk.Button(
+        fenetre, text="Confirmer", font=("Arial", 12, "bold"),
+        bg="#ffeb3b", fg="black",
+        command=lambda: access(entre_lignes.get(), entre_colonnes.get(), entre_jetons_valid.get())
+    )
+    button_default = tk.Button(
+        fenetre, text="Par défaut", font=("Arial", 12, "bold"),
+        bg="#ffd54f", fg="black",
+        command=main
+    )
+
+    # Placement des widgets
     label_lignes.grid(row=1, column=0, padx=10, pady=10, sticky="e")
+    entre_lignes.grid(row=1, column=1, padx=10, pady=10)
     label_colonnes.grid(row=2, column=0, padx=10, pady=10, sticky="e")
+    entre_colonnes.grid(row=2, column=1, padx=10, pady=10)
     label_jetons_valid.grid(row=3, column=0, padx=10, pady=10, sticky="e")
-    entre_lignes.grid(row=1, column=1)
-    entre_colonnes.grid(row=2, column=1)
-    entre_jetons_valid.grid(row=3, column=1)
-    button_default.grid(row=4, column=0)
-    button_confirmer.grid(row=4, column=1)
+    entre_jetons_valid.grid(row=3, column=1, padx=10, pady=10)
+
+    button_default.grid(row=4, column=0, pady=20)
+    button_confirmer.grid(row=4, column=1, pady=20)
 
     return fenetre
 
