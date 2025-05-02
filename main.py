@@ -12,6 +12,7 @@ PLAYER_COLORS = {1: "red", 2: "yellow"}
 
 # Grille de jeu (0 = vide, 1 = joueur 1, 2 = joueur 2)
 grid = [[0] * COLS for _ in range(ROWS)]
+lst_pos = []
 current_player = 1  # j1 commence
 canvas = None
 
@@ -150,11 +151,12 @@ def check_winner():
 #On doit modifier handle_click pour vérifier après chaque coup :
 def handle_click(event):
     """Ajoute un jeton dans la colonne sélectionnée et vérifie la victoire."""
-    global current_player
+    global current_player, lst_pos
     col = event.x // CELL_SIZE
     for row in range(ROWS - 1, -1, -1):
         if grid[row][col] == 0:
             grid[row][col] = current_player
+            lst_pos.append((row,col))
             draw_grid()
             winner = check_winner()
             if winner:
