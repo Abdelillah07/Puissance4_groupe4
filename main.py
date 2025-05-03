@@ -22,6 +22,7 @@ def access(r, c, nb_jetons_valid):
     ROWS = int(r)
     COLS = int(c)
     NB_JETONS_V = int(nb_jetons_valid)
+    grid = [[0] * COLS for _ in range(ROWS)]
     main()
 
 def fen_accueil():
